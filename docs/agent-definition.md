@@ -53,7 +53,7 @@ Using Solution Manager
     - Select **+Add**
     - In the ***Name*** field enter **Fiserv DNA**.
     - In the ***OS*** field select **Fiserv DNA** from the drop-down list.
-    - In the ***Type*** field select **AFiserv DNAS** from the drop-down list.
+    - In the ***Type*** field select **Fiserv DNA** from the drop-down list.
     - In the ***Command*** field enter **cmd.exe /c**.
     - Select Save.
 - Select **Scripts** from the upper right hand corner.
@@ -81,19 +81,19 @@ This is done by adding a new ACS Fiserv DNA Agent definition using Solution Mana
 
 Items defined in red are required values (note : global properties are supported). 
 
-![Defining a Connection](../static/img/agent.png)
+![Defining the Agent](../static/img/agent.png)
 
-![Defining a Connection](../static/img/agent1.png)
+![Defining the Agent](../static/img/agent1.png)
 
-![Defining a Connection](../static/img/agent2.png)
+![Defining the Agent](../static/img/agent2.png)
 
-![Defining a Connection](../static/img/agent3.png)
+![Defining the Agent](../static/img/agent3.png)
 
-![Defining a Connection](../static/img/agent4.png)
+![Defining the Agent](../static/img/agent4.png)
 
-![Defining a Connection](../static/img/agent5.png)
+![Defining the Agent](../static/img/agent5.png)
 
-![Defining a Connection](../static/img/agent6.png)
+![Defining the Agent](../static/img/agent6.png)
 
 1.  Open Solution Manager.
 2.  From the Home page select **Library**
