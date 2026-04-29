@@ -1,14 +1,39 @@
+---
+sidebar_label: 'Migration'
+title: Legacy DNA to ACS DNA migration
+description: "Instructions for migrating existing Fiserv DNA legacy tasks to the ACS FiservDNA connector environment using the conversion utilities."
+tags:
+  - Procedural
+  - System Administrator
+---
+
 # Legacy DNA to ACS DNA Migration
-The conversion program provides a mechanism to migrate existing FiServ DNA legacy tasks to the new ACS Fiserv DNA environment.
+
+**Theme:** Build | **Audience:** System Administrator
+
+## What is it?
+
+The conversion program provides a mechanism to migrate existing Fiserv DNA legacy tasks to the new ACS Fiserv DNA environment.
 
 One of the major changes is that all information for the task execution is now contained within the OpCon environment instead of residing in various files associated with each connector installation.
 
-The previous .ini file contents are contained in the **Fiserv DNA** agent definition, while the environment and error word information are provided as scripts within the OpCon environment. 
+The previous .ini file contents are contained in the **Fiserv DNA** agent definition, while the environment and error word information are provided as scripts within the OpCon environment.
 
 All user information used is now selected from a list of Fiserv DNA Batch Users.
 
+Use this migration process when you want to:
+- Convert existing Windows Fiserv DNA jobs to ACS FiservDNA while preserving all frequencies, dependencies, and events.
+- Move connector configuration from individual .ini files into the centralised OpCon environment.
+
+## Prerequisites
+
+Before running the conversion utilities, complete the following:
+- Download and extract ACSDNAMigration.zip from the SMA FTP site at `/OpCon Releases/Integrations/FiservDNA/Migration Utility`.
+- Make a backup copy of the OpCon database and the schedules to be converted.
+
 ## Install Conversion Utilities
-Download the ACS FiServ DNA migration software (ACSDNAMigration.zip) from the FTP site **/OpCon Releases/Integrations/FiservDNA/Migration Utility** and extract the ACSDNAMigration.zip file into a directory on a Windows system.
+
+Download the ACS Fiserv DNA migration software (ACSDNAMigration.zip) from the FTP site **/OpCon Releases/Integrations/FiservDNA/Migration Utility** and extract the ACSDNAMigration.zip file into a directory on a Windows system.
 
 Edit the Conversion.config file setting the information using the **Encrypt.exe** utility to encrypt passwords and tokens.
 
@@ -45,7 +70,7 @@ Property   |  Description
 **OPCON_USER_PASSWORD**    | The password of the OpCon user encrypted using the Encrypt utility.
 
 ## Encrypt.exe Utility
-The Encrypt.exe utility uses standard 64 bit encryption to encrypt text strings. This utility must be used to encrypt passwords and tokens inserted into the Conversion.config file.
+The Encrypt.exe utility uses standard 64-bit encryption to encrypt text strings. This utility must be used to encrypt passwords and tokens inserted into the Conversion.config file.
 
 Arguments   |  Description
 ----------- | ----------------
@@ -114,7 +139,7 @@ The third action is to convert legacy Fiserv DNA tasks to ACS Fiserv DNA.
 
 ### Create the required Batch Users
 
-Using Solution Manager, create the required Batch Users (when creating the users, select **Fiserv DNA** from the target system drop-down list).
+Using Solution Manager, create the required Batch Users (when creating the users, select **Fiserv DNA** from the target system list).
 - Oracle User (from the connector SMAOracleConnection .ini file).
 - SQL User (from the connector .ini file or the Legacy Fiserv DNA task definition).
 
@@ -122,7 +147,7 @@ Using Solution Manager, create the required Batch Users (when creating the users
 This process requires the creation of the appropriate directory containing the various files needed during the agent creation process.
 
 - create the environment script from the provided environment file.
-- create the errorwords script from the provided errortwords file.
+- create the errorwords script from the provided errorwords file.
 - extract the oracle connection information from the provided oracle connection file.
 - extract the data from provided inin file.
 - create the new Fiserv DNA Agent using the supplied name.
@@ -132,13 +157,15 @@ This process requires the creation of the appropriate directory containing the v
 
 ### Convert the Legacy Fiserv DNA tasks
 This process scans through the schedules and tasks converting the found according to the schedule and job filters. 
-It is suggested that before starting the process, a copy of the OpCon database is made as well as a copy of the schedules to be converted.
+Before starting the process, make a copy of the OpCon database as well as a copy of the schedules to be converted.
 
 The process resets the job data from Windows to ACS. No other OpCon objects such as frequencies, dependencies, events are touched. 
 
-- create a directory consisting of the machine name in the **input-name** directory.
-- copy the connector.ini, environment, SMAErrorWordsFile and SMAOracleConnection files into the created directory.
-- run the createDNAAgent.exe utility using the appropriate arguments.
+To convert legacy Fiserv DNA tasks, complete the following steps:
+
+1. Create a directory consisting of the machine name in the **input-name** directory.
+2. Copy the connector.ini, environment, SMAErrorWordsFile and SMAOracleConnection files into the created directory.
+3. Run the createDNAAgent.exe utility using the appropriate arguments.
 	- get the id associated with the target ACS Fiserv DNA agent.
 	- retrieve a list of schedules according to the schedule filter.
 	- process each selected schedule
@@ -152,3 +179,25 @@ The process resets the job data from Windows to ACS. No other OpCon objects such
 			- create the ACS properties object. 
 			- convert the command line to Fiserv DNA job object.
 			- commit the job changes.
+
+## FAQs
+
+**Are existing frequencies, dependencies, and events preserved during migration?**
+Yes. No OpCon objects such as frequencies, dependencies, and events are touched during the conversion. Only the task data type is changed.
+
+**Do I need to back up the database before converting?**
+Yes. Before starting the conversion process, make a copy of the OpCon database and the schedules to be converted.
+
+**Can I convert all tasks in all schedules at once?**
+Yes. Use a value of `ALL` for both the schedule filter (`-sf`) and job filter (`-jf`) arguments when running ConvertDNATasks.exe.
+
+**Do I still need to maintain .ini files on the remote server after migration?**
+No. After migration, all configuration is contained within the OpCon environment. There is no longer any requirement to maintain configuration files on the remote server.
+
+## Glossary
+
+**Conversion.config** — The configuration file for the ACS DNA Migration utilities, containing connection settings for the target OpCon system including API address, database credentials, and user credentials.
+
+**Job filter** — A pattern passed to ConvertDNATasks.exe via the `-jf` argument that determines which tasks within a schedule are converted. Supports wildcards; a value of `ALL` converts all Fiserv DNA tasks in the schedule.
+
+**Schedule filter** — A pattern passed to ConvertDNATasks.exe via the `-sf` argument that determines which schedules are included in the conversion. Supports wildcards; a value of `ALL` converts all schedules.

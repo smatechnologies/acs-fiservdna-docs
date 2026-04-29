@@ -1,27 +1,29 @@
 ---
 sidebar_label: 'Release Notes'
+title: ACS FiservDNA Connector release notes
+description: "Version history and change details for the ACS FiservDNA Connector, including new features, improvements, and bug fixes."
+tags:
+  - Reference
+  - System Administrator
+  - Automation Engineer
 ---
 
-# FiservDNA ACS Release Notes
+# ACS FiservDNA Connector release notes
 
-## General
+## 25
 
-When using the FiservDNA ACS implementation, the task becomes a wrapper for the Fiserv DNA Connector passing information when executing the connector. The various files (.ini, environment, error words) are created by the FiservDNA ACS environment for each task execution. User codes required for database access and drive mappings are defined as Fiserv DNA batch users.
+### 25.0.3
 
-A Fiserv DNA agent definition is required.
-It is best to use the migration utilities to create the agent definition as the utility uses the various files (.ini, environment, error words) when creating the definitions and scripts (environment and error words files are stored as FiserDNA scripts).
+2026 March
 
-As ACS does not provide a MSGIN capability, a standard Windows Agent must be installed alongside the ACS installation to provide MSGIN capabilities. 
+### What's new
 
-## Release 25.0.3
+:eight_spoked_asterisk: Support Advanced Failure Criteria.
 
-**New Features**
+#### Fixes
 
-:eight_spoked_asterisk: **CON-927**: Support Advnaced Failure Creteria.
+:eight_spoked_asterisk: Drive mapping user passwords must be re-encrypted so the Fiserv DNA connector can decrypt them.
 
-**Bugs**
+:eight_spoked_asterisk: Implement Event definitions in the user interface and add them to the generated .ini file.
 
-:eight_spoked_asterisk: **CON-885**: Drive mapping user passwords must be re-encrypted so the Fiserv DNA connector can decrypt them.
-:eight_spoked_asterisk: **CON-886**: Implement Event definitions in the user interface and add them to the generated .ini file.
-:eight_spoked_asterisk: **CON-919**: Support environment variables.
-
+:eight_spoked_asterisk: Support environment variables.

@@ -1,9 +1,19 @@
 module.exports = {
   mySidebar: [
     'index',
-	'release-notes',
+    'release-notes',
+    'overview',
     'installation',
-    'agent-definition',
+    {
+      type: 'category',
+      label: 'Agent Definition',
+      items: [
+        'agent-definition',
+        'agent-batch-users',
+        'agent-scripts',
+        'agent-connection',
+      ],
+    },
     'task-definition',
     'operation',
     'migration',
