@@ -18,6 +18,7 @@ tags:
 
 ### What's new
 
+:eight_spoked_asterisk: Display DNA QueueID in user interface. DNA QueueID remains in user interface when job completes. 
 :eight_spoked_asterisk: Support Advanced Failure Criteria.
 
 #### Fixes
