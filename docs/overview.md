@@ -23,15 +23,15 @@ OpCon provides a solid integration with Fiserv DNA processing with multiple feat
 - Convert DNA Template program
 
 Use ACS FiservDNA when you want to:
-- Centralise all Fiserv DNA connector configuration within OpCon, eliminating the need to edit configuration files on the remote server.
+- Centralize all Fiserv DNA connector configuration within OpCon, eliminating the need to edit configuration files on the remote server.
 - Query Fiserv DNA environments to automatically import and save task definitions as OpCon jobs.
 
-ACS FiservDNA allows the definition and execution of FiservDNA tasks using Solution Manager.
+ACS FiservDNA allows you to define and run FiservDNA tasks using Solution Manager.
 It is part of the ACS (Agentless Connector System) suite of products.
 
 ACS is a new OpCon Agent type that provides a framework for agent development. It is an internal component provided by the SMANetCom module. All integrations are generated DLLs and placed in a standard folder that is monitored by the ACS services.
 
-These modules are loaded into the OpCon environment during startup. New modules can be copied to the monitored folders and will be available for configuration after the SMA Relay or SMA OpCon Service Manager and SMA OpCon RestAPI services are restarted.
+These modules are loaded into the OpCon environment during startup. New modules can be copied to the monitored folders and are available for configuration after the SMA Relay or SMA OpCon Service Manager and SMA OpCon RestAPI services are restarted.
 
 ![Overview](../static/img/ACS-FiservDNA-Overview.png)
 
@@ -40,7 +40,7 @@ All code and task / agent screen definitions are contained in the generated DLL 
 Agent / task definitions for the ACS environment can only be created / updated using Solution Manager.
 JORS support for the ACS environment is only provided through Solution Manager.
 
-The ACS FiservDNA implementation serves as a wrapper for the SMARunDNAJob program. All definitions are now located within the OpCon environment and the required files are created for each execution. This means that there is no longer any requirement to edit configuration files on the remote server.
+The ACS FiservDNA implementation serves as a wrapper for the SMARunDNAJob program. All definitions are now located within the OpCon environment and the required files are created for each job run. This means that there is no longer any requirement to edit configuration files on the remote server.
 - environment file is stored as a script in the OpCon repository.
 - Error word file is stored as a script in the OpCon repository.
 - .ini file definitions are included in the ACS Fiserv DNA Agent.
