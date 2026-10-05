@@ -16,17 +16,17 @@ tags:
 
 All definitions can only be performed using Solution Manager.
 
-Once the ACS FiservDNA connector has been registered with the OpCon system, it will be possible to perform agent definitions.
+Once the ACS FiservDNA connector has been registered with the OpCon system, you can define agents.
 
-One of the features of the ACS FiservDNA implementation is that all configuration data is maintained within the OpCon environment and the ACS FiservDNA implementation uses this information to create unique file instances for each execution.
+One of the features of the ACS FiservDNA implementation is that all configuration data is maintained within the OpCon environment and the ACS FiservDNA implementation uses this information to create unique file instances for each job run.
 - SMARunDNAJob.ini file
 - SMAOracleConnection.ini file
 - environment.txt file
-- SMAErrorWordsFile.txt
+- errorWords.txt file
 
-The **environment.txt** file and the **SMAErrorWordsFile.txt** information are stored as FiservDNA scripts, while the information for the **SMARunDNAJob.ini** and **SMAOracleConnection.ini** files are defined when configuring the ACS FiservDNA connector.
+The **environment.txt** file and the **errorWords.txt** information are stored as FiservDNA scripts, while the information for the **SMARunDNAJob.ini** and **SMAOracleConnection.ini** files are defined when configuring the ACS FiservDNA connector.
 
-The ACS FiservDNA implementation also makes use of OpCon batch users to provide the required user and passwords for the network drive mappings, the SQT user and the Oracle user inserted into the SMAOracleConfiguration.ini file.
+The ACS FiservDNA implementation also makes use of OpCon batch users to provide the required user and passwords for the network drive mappings, the SQT user and the Oracle user inserted into the SMAOracleConnection.ini file.
 
 Use this section when you want to:
 - Configure the network drive mappings, SQT settings, Oracle connection, and processing options that apply to all jobs on this agent connection.
@@ -46,7 +46,7 @@ Complete these tasks in order before defining tasks:
 Yes. Batch users for each network drive mapping user, the SQT user, and the Oracle user must be defined before defining the agent connection.
 
 **Must scripts be defined before defining the agent?**
-Yes. The environment script and error words script must be created in the OpCon script library before defining the agent.
+The environment script is required and must be created in the OpCon script library before defining the agent. The error words script is optional; if you use one, create it before defining the agent.
 
 **Can global properties be used in agent definition fields?**
 Yes. Global properties are supported in agent definition fields.

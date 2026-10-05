@@ -48,10 +48,13 @@ To configure task details for a Run Fiserv DNA Job task, complete the following 
 1.  Select the **Task Details** button.
 2.  In the **Integration Selection** section, select the primary integration which is a Fiserv DNA connection previously defined.
 3.  In the **Task Configuration** section
-    - **DNA Job Query** section can be used to fetch task information for a task defined in the Fiserv DNA environment and use this to populate the job OpCon Job information.
-        - Select **Auto-Populate Values** to insert the returned values into the OpCon task definition.
-        - Select **Replace Existing Values** to replace any existing values in the OpCon task definition.
-        - In the **Query Name** field, enter the name of the task to retrieve from the Fiserv DNA environment. 
+    - **DNA Job Query** section can be used to fetch task information for a task defined in the Fiserv DNA environment and use this to populate the job OpCon Job information. If the agent cannot connect to the Fiserv DNA Oracle database, the section shows only the message **Unable to query DNA database**; check the agent's **Oracle Configuration**.
+        - **Auto-Populate Values** is selected by default. Keep it selected to insert the returned values into the OpCon task definition.
+        - Select **Replace Existing Values** to replace any existing values in the OpCon task definition. It is cleared by default.
+        - In the **Query Name** field, enter the start of the name of the application to retrieve from the Fiserv DNA environment. Applications whose names begin with the text you enter are returned.
+        - In the **Query Results** list, select the application. Up to 50 matches are listed by name and number, and the first is selected.
+        - In the **Parameters to Populate** list, select **Use Property** for each parameter to include, and enter its **Value**. The list shows the application's parameters.
+        - In the **Cycle Codes to Populate** list, select the cycle codes to include.
     - In the **Environment Variables** section enter the required properties.
         - In the **Schedule Date** field enter the name of the global property that contains the schedule date in the yyyyMMdd format or use the default and create the global property.
         - In the **Schedule Name** field use the default property.
@@ -59,31 +62,31 @@ To configure task details for a Run Fiserv DNA Job task, complete the following 
         - In the **Job Id** field use the default property.
     - In the **Job Configuration** section enter the required values.
         - In the **Application Name** field enter the name of the application to be processed.
-        - In the **Application Number** field enter the application number - will override the application name field.
+        - In the **Application Number** field enter the application number. This value overrides the application name field.
         - In the **Additional Parameters** section enter parameters associated with the job using **+ Add Item** button to add parameters to the list.
-            - In the **Parameter Cd** field enter the parameter code.
+            - In the **Parameter CD** field enter the parameter code.
             - In the **Parameter Value** field enter the parameter value.
         - In the **Additional Cyclic Parameters** section enter cyclic parameters associated with the job using **+ Add Item** button to add parameters to the list.
             - In the **Parameter** field enter the cyclic parameter.
-        - If required, select **Cycle Code not Required**.
+        - If required, select **Cycle Code Not Required**. When selected, the job does not fail if no cycle codes are specified in the job configuration but cycle codes are found in the database.
         - In the **Effective Date** field enter the effective date (use global properties to enter a $Schedule date value).
-        - In the **Effective Date Offset** field enter the number of dates which will offset the effective date.
+        - In the **Effective Date Offset** field enter the number of days that offset the effective date.
         - If required, select **Use Business Date**.
-        - In the **Queue Number Property Name** field enter the name of an OpCon property that will be used to contain the job's queue number.
-        - In the **Enhanced Monitoring** section, enter any monitoring information
-            - In the **Max Seconds to Time-out** field enter the value that will fail the job in case of communications loss during status monitoring. 
+        - In the **Queue Number Property Name** field enter the name of an OpCon property to contain the job's queue number.
+        - In the **Enhanced Monitoring** section, enter any monitoring information.
+            - In the **Max. Seconds to Time-out** field enter the number of seconds. If the value is greater than 0, a loss of communication during status monitoring that lasts longer than this many seconds fails the job. The default is 0, which sets no limit. This value replaces the agent's **Max. Seconds to Time-out**.
             - If required, select **Fail on Inactivity**.
-            - In the **Max seconds to execute** indicate the maximum number of seconds a job may execute before being marked as failed. 
+            - In the **Max. Seconds to Execute** field enter the maximum number of seconds the job can run. If the value is greater than 0, a job that runs longer is marked as failed. The default is 0, which sets no limit.
         - In the **File Load** section
             - select **Enabled** if the job is a file load job.
             - In the **File Name** field enter the name of the file to load.
-            - In the **Batch Count Property Name** enter the name of the OpCon property where the loaded batch count value will be stored.
-            - In the **Record Count Property Name** enter the name of the OpCon property where the loaded record count value will be stored.  
-            - In the **Credits Property Name** enter the name of the OpCon property where the loaded credit value will be stored.       
-            - In the **Debits Property Name** enter the name of the OpCon property where the loaded debit value will be stored.  
-            - In the **File Number Property Name** enter the name of the OpCon property where the loaded file number value will be stored.   
-        - In the **Failure Criteria** section set the failure criteria for the OpCon task.
-4.  Save the definition changes. 
+            - In the **Batch Count Property Name** enter the name of the OpCon property where the loaded batch count value is stored.
+            - In the **Record Count Property Name** enter the name of the OpCon property where the loaded record count value is stored.
+            - In the **Credits Property Name** enter the name of the OpCon property where the loaded credit value is stored.
+            - In the **Debits Property Name** enter the name of the OpCon property where the loaded debit value is stored.
+            - In the **File Number Property Name** enter the name of the OpCon property where the loaded file number value is stored.
+        - In the **Failure Criteria** section set the failure criteria for the OpCon task. By default, any exit code other than 0 fails the job.
+4.  Save the definition changes.
 
 ## FAQs
 
@@ -97,7 +100,7 @@ Yes. Use the **DNA Job Query** section to fetch task information from the Fiserv
 Yes. Global properties are supported when defining tasks.
 
 **Does the Application Number field override the Application Name?**
-Yes. Entering a value in the **Application Number** field will override the **Application Name** field.
+Yes. Entering a value in the **Application Number** field overrides the **Application Name** field.
 
 ## Glossary
 

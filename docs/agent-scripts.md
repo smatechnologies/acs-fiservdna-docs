@@ -14,7 +14,7 @@ tags:
 
 ## What is it?
 
-The ACS FiservDNA implementation uses two scripts to provide the **environment.txt** and **SMAErrorWordsFile.txt** files for each task execution. These scripts are requested during the ACS agent definition and the contents of each script is passed during task startup to enable the creation of unique files for each task.
+The ACS FiservDNA implementation uses two scripts to provide the **environment.txt** and **errorWords.txt** files for each job run. These scripts are requested during the ACS agent definition and the contents of each script is passed during task startup to enable the creation of unique files for each task.
 
 Use existing **environment.txt** and **SMAErrorWordsFile.txt** files from an existing FiservDNA legacy connector to provide the contents of each script.
 
@@ -39,7 +39,7 @@ To define FiservDNA scripts, complete the following steps:
     5.  In the **Command** field enter **cmd.exe /c**.
     6.  Select **Save**.
 6.  Select **Scripts** from the upper right-hand corner.
-    1.  Create the Connector.config script.
+    1.  Create the environment script.
     2.  Select **+Add**.
     3.  In the **Name** field enter a name for the script. It is suggested using the proposed agent name and append **env** to the name.
     4.  In the **Type** field select **Fiserv DNA** from the list.
@@ -47,7 +47,7 @@ To define FiservDNA scripts, complete the following steps:
     6.  In the **Script** field paste the contents of the **environment.txt** file.
     7.  Select **Save**.
 7.  Select **Scripts** from the upper right-hand corner.
-    1.  Create the Connector.config script.
+    1.  Create the error words script.
     2.  Select **+Add**.
     3.  In the **Name** field enter a name for the script. It is suggested using the proposed agent name and append **errorwords** to the name.
     4.  In the **Type** field select **Fiserv DNA** from the list.

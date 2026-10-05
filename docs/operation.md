@@ -16,7 +16,7 @@ tags:
 
 The ACS FiservDNA connector operates as an OpCon agent, activating when a connection to the Fiserv DNA Oracle database is established and submitting events through an associated Windows agent.
 
-- The connector enters the **DOWN** state if the Oracle database connection fails on activation.
+- The connector enters the **DOWN** state if the SMARunDNAJob program is missing or the Oracle database connection fails.
 - All agent and task definitions, and JORS access, are only available through Solution Manager.
 
 ## Solution Manager
@@ -31,7 +31,12 @@ To configure agent and task definitions, the associated Batch Users, environment
 
 ## Agent activation
 
-To activate the agent, a connection will be established to the Fiserv DNA Oracle Database. If the connection fails, the agent will be placed in the **DOWN** state.
+The connector communicates only when both of the following are true:
+
+- The SMARunDNAJob.exe program is in the ACS FiservDNA connector directory.
+- A connection to the Fiserv DNA Oracle database can be established.
+
+The connector checks both conditions when the agent is activated and at every later status check. If either check fails, the agent is placed in the **DOWN** state.
 
 ## Submitting events
 
@@ -39,12 +44,19 @@ To submit events, an associated Windows Agent must be provided as the ACS implem
 
 ## Environment variables
 
-The ACS implementation sets the required Environment Variables matching those provided by the Windows Agent in order for the ACS execution to function correctly.
+The ACS implementation sets the environment variables that the Windows Agent provides, so that the Fiserv DNA job runs correctly. The values come from the **Environment Variables** section of the job definition. See [Task Definition](./task-definition.md).
+
+Variable | Job definition field
+-------- | --------------------
+`SMA_MSLSAM_SCHEDULE_DATE` | **Schedule Date**
+`SMA_MSLSAM_SCHEDULE_NAME` | **Schedule Name**
+`SMA_MSLSAM_JOB_NAME` | **Job Name**
+`SMA_MSLSAM_SAM_JOB_ID` | **Job Id**
 
 ## FAQs
 
 **Why would an agent enter the DOWN state?**
-The agent enters the DOWN state when the connection to the Fiserv DNA Oracle database cannot be established during activation.
+The agent enters the DOWN state when the SMARunDNAJob.exe program is not in the connector directory, or when the connection to the Fiserv DNA Oracle database cannot be established. Both are checked at activation and at every status check.
 
 **Does the ACS FiservDNA connector support the MSGIN functionality?**
 No. An associated Windows agent must be provided to support MSGIN functionality and event submission.
